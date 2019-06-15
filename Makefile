@@ -2,7 +2,8 @@ NAME = jgehin.filler
 
 SRC_PATH = src
 
-SRC_NAME =  main.c
+SRC_NAME =  main.c \
+			init.c
 
 LBFLAGS = -I libft/includes/ -MMD
 

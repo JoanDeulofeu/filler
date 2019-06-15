@@ -15,4 +15,6 @@ typedef struct		s_f
 	char			**map;
 }					t_f;
 
+int					ft_do_tab(t_f *f);
+
 #endif

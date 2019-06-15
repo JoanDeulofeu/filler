@@ -1,16 +1,18 @@
 #include "filler.h"
 
-int	ft_do_tab(t_f *f)
+int		ft_fill_map(t_f *f, int lgn, char *line)
 {
-	int x = 0;
+	int		x = 0;
+	FILE	*fichier = NULL;
 
-	if (!(f->map = (char**)malloc(sizeof(char*) * f->platx)))
-		return (0);
 	while (x < f->platx)
 	{
-		if (!(f->map[x] = (char*)malloc(sizeof(char) * f->platy)))
-			return (0);
+		f->map[lgn][x] = line[x + 4];
 		x++;
+		fichier = fopen("test.txt", "a+");
+		if (x == f->platx)
+			fprintf(fichier, "LA LIGNE[%d] = %s\n", lgn, f->map[lgn]);
+		fclose(fichier);
 	}
 	return (0);
 }
@@ -19,8 +21,6 @@ int		ft_filler(t_f *f)
 {
 	char	*line = NULL;
 	FILE	*fichier = NULL;
-	(void)f;
-
 
 	while (get_next_line(0, &line) > 0)
 	{
@@ -33,8 +33,8 @@ int		ft_filler(t_f *f)
 
 		if (line[0] == 'P' && line[1] == 'l' && f->init == FALSE)
 		{
-			f->platx = ft_atoi(&line[8]);
-			f->platy = ft_atoi(&line[11]);
+			f->platy = ft_atoi(&line[8]);
+			f->platx = ft_atoi(&line[11]);
 			ft_do_tab(f);
 			f->init = TRUE;
 		}
@@ -43,6 +43,9 @@ int		ft_filler(t_f *f)
 		{
 			//algo placement piece
 		}
+
+		if (line[0] > 47 && line[0] < 58)
+			ft_fill_map(f, ft_atoi(&line[0]), line);
 
 	}
 	return(0);
