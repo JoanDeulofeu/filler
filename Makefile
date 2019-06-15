@@ -29,11 +29,11 @@ HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C libft/
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(NAME)
+	@$(MAKE) -C libft/
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o players/$(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(LBFLAGS) -I $(HEADER_PATH) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(LBFLAGS) -I $(HEADER_PATH) -o $@ -c $<
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -45,7 +45,7 @@ clean:
 
 fclean: clean
 	make fclean -C libft/
-	rm -f $(NAME)
+	rm -f players/$(NAME)
 
 re: fclean
 	$(MAKE) all
