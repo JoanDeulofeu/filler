@@ -3,7 +3,10 @@ NAME = jgehin.filler
 SRC_PATH = src
 
 SRC_NAME =  main.c \
-			init.c
+			init.c \
+			algo.c \
+			pct.c  \
+			free.c
 
 LBFLAGS = -I libft/includes/ -MMD
 
