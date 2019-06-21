@@ -2,18 +2,18 @@ NAME = jgehin.filler
 NAME2 = visu
 
 SRC_PATH =		src
-SRC_NAME =		main.c \
-				init.c \
-				algo.c \
-				pct.c  \
-				free.c
+SRC_NAME =		mainfiller.c	\
+							init.c 				\
+							algo.c 				\
+							pct.c  				\
+							free.c
 
 SRC_PATH2 =		src2
-SRC_NAME2 =		main.c		\
-				sdl.c		\
-				event.c		\
-				errors.c	\
-				map.c
+SRC_NAME2 =		mainvisu.c		\
+							sdl.c			\
+							event.c		\
+							errors.c	\
+							map.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra #-Werror

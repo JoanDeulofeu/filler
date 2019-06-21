@@ -3,7 +3,7 @@
 int		ft_fill_map(t_f *f, int lgn, char *line)
 {
 	int		x = 0;
-	// FILE	*fichier = NULL;
+	FILE	*fichier = NULL;
 
 	while (x < f->platx)
 	{
@@ -21,10 +21,14 @@ int		ft_fill_map(t_f *f, int lgn, char *line)
 			// ft_test(f->him_originx, f->him_originy);
 		}
 		x++;
-		// fichier = fopen("test.txt", "a+");
-		// if (x == f->platx)
-		// 	fprintf(fichier, "LA LIGNE[%d] = %s\n", lgn, f->map[lgn]);
-		// fclose(fichier);
+		fichier = fopen("test.txt", "a+");
+		if (x == f->platx)
+		{
+			if (lgn == 0)
+				fprintf(fichier, "TOUR %d\n", f->round++);
+			fprintf(fichier, " %s\n", f->map[lgn]);
+		}
+		fclose(fichier);
 	}
 	return (0);
 }
@@ -112,6 +116,7 @@ int		main(void)
 	f.piecex = 0;
 	f.piecey = 0;
 	f.player = 1;
+	f.round = 1;
 	f.map = NULL;
 	f.piece = NULL;
 	f.init = FALSE;

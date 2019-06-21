@@ -17,6 +17,7 @@ typedef struct		s_f
 {
 	char			me;
 	char			him;
+	int				round;
 	int				me_originx;
 	int				me_originy;
 	int				him_originx;
