@@ -1,7 +1,49 @@
 #include "filler.h"
 
+// int		ft_place_piece(t_f *f, int x, int y)
+// {
+// 	int		px = -1;
+// 	int		py = -1;
+// 	int		svx = x;
+//
+// 	while (++py < f->piecey)
+// 	{
+// 		while (++px < f->piecex)
+// 		{
+// 			if (f->piece[py][px] == '*')
+// 			{
+// 				if (f->map[y][x] == '.')
+// 					f->map[y][x] = 'T';
+// 			}
+// 			x++;
+// 		}
+// 		px = -1;
+// 		x = svx;
+// 		y++;
+// 	}
+// 	return (0);
+// }
+//
+// int		ft_remove_piece(t_f *f, int x, int y)
+// {
+// 	int svx = x;
+// 	int svy = y;
+//
+// 	while (y < svy + f->piecey)
+// 	{
+// 		while (x < svx + f->piecex)
+// 		{
+//
+// 		}
+// 	}
+// 	return (0);
+// }
+//
 // int		ft_pct(t_f *f, int x, int y)
 // {
+// 	ft_place_piece(f, x, y);
+// 	//algo
+// 	ft_remove_place(f, x, y);
 // 	return (0);
 // }
 

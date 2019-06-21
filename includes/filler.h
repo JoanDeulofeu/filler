@@ -26,6 +26,7 @@ typedef struct		s_f
 	int				player;
 	int				init;
 	int				init_touch;
+	int				touch;
 	int				piecex;
 	int				piecey;
 	int				filling;

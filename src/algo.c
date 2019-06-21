@@ -40,8 +40,12 @@ int		ft_check_pos(t_f *f, int x, int y)
 				is_o++;
 			else if (f->map[y][x] == f->me)
 				is_x++;
+			if (is_o > 0 || is_x > 1)
+				break;
 			x++;
 		}
+		if (is_o > 0 || is_x > 1)
+			break;
 		x = svx;
 		++y;
 		px = -1;
@@ -74,15 +78,13 @@ int		ft_find_place(t_f *f)
 		}
 		x = -1;
 	}
-	x = f->pos->x;
-	y = f->pos->y;
 	// FILE* fichier = NULL;
 	// fichier = fopen("test.txt", "a+");
-	// fprintf(fichier, "PUSH  x%d y%d\n", x, y);
+	// fprintf(fichier, "PUSH  x%d y%d\n", f->pos->x, f->pos->y);
 	// fclose(fichier);
-	ft_putnbr(y);
+	ft_putnbr(f->pos->y);
 	ft_putchar(' ');
-	ft_putnbr(x);
+	ft_putnbr(f->pos->x);
 	ft_putchar('\n');
 	// if (f->pos->pct > 90)
 	// 	sleep(5);

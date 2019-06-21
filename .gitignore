@@ -53,3 +53,9 @@ dkms.conf
 
 jgehin.filler
 filler.trace
+SDL2
+SDL2/*
+SDL2_mixer-2.0.4
+SDL2-2.0.9
+visu
+*.gz
