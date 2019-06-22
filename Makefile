@@ -9,11 +9,12 @@ SRC_NAME =		mainfiller.c	\
 							free.c
 
 SRC_PATH2 =		src2
-SRC_NAME2 =		mainvisu.c		\
-							sdl.c			\
-							event.c		\
-							errors.c	\
-							map.c
+SRC_NAME2 =		mainvisu.c	\
+				sdl.c		\
+				event.c		\
+				errors.c	\
+				map.c		\
+				case.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra #-Werror

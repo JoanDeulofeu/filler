@@ -47,8 +47,11 @@ typedef struct		s_v {
 	SDL_Event		event;
 	t_texture		*tex;
 	t_map			*lst;
+	int				tour;
 	int				platx;
 	int				platy;
+	int				casex;
+	int				casey;
 	int				init;
 }					t_v;
 
@@ -70,5 +73,8 @@ void				event_handler(t_v *v);
 
 //MAP.C
 void				ft_draw_grid(t_v *v, t_texture *tex);
+
+//CASE.C
+int					ft_draw_case(t_v *v);
 
 #endif

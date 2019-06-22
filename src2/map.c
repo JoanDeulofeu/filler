@@ -50,7 +50,7 @@ void	ft_gridy(t_texture *tex, t_pos *orig, t_pos *dest, int espx)
 
 int		ft_find_esp(int nb_piece)
 {
-	int esp = 10;
+	int esp = 9;
 	int res = 0;
 
 	while (res < 1000)
@@ -69,6 +69,8 @@ void	ft_draw_grid(t_v *v, t_texture *tex)
 
 	espx = ft_find_esp(v->platx);
 	espy = ft_find_esp(v->platy);
+	v->casex = espx;
+	v->casey = espy;
 	orig.x = (WIDTH - (v->platx * espx)) / 2;
 	orig.y = (HEIGHT - (v->platy * espy)) / 2;
 	dest.x = orig.x + (v->platx * espx);

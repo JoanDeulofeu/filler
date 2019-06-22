@@ -122,7 +122,10 @@ int		main(void)
 	v.lst = NULL;
 	v.platx = 0;
 	v.platy = 0;
+	v.casex = 0;
+	v.casey = 0;
 	v.init = 0;
+	v.tour = 1;
 	initialize_sdl(&v);
 	ft_init_visu(&v);
 	// ret = ft_visu(&v);

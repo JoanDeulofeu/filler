@@ -37,6 +37,7 @@ void	handle_keys(t_v *v)
 		// draw_player(s, s->p_pos);
 		// update_image(s, s->sdl->game);
 		ft_draw_grid(v, v->tex);
+		ft_draw_case(v);
 		update_image(v, v->tex);
 	// }
 }
@@ -49,11 +50,6 @@ void	event_handler(t_v *v)
 	// SDL_SetRelativeMouseMode(SDL_TRUE);
 	while (game)
 	{
-		// if (line[0] == 'P' && line[1] == 'l' && v->init == TRUE)
-		// {
-		//
-		// 	update_image(v, v->tex);
-		// }
 		while ((SDL_PollEvent(&(v->event))) != 0)
 		{
 			if (v->event.type == SDL_QUIT)
@@ -63,5 +59,6 @@ void	event_handler(t_v *v)
 				game = 0;
 		}
 		handle_keys(v);
+		v->tour++;
 	}
 }
