@@ -11,83 +11,120 @@
 // 	// return(0);
 // }
 
-int		ft_fill_map(t_v *v, int lgn, char *line)
+char	**ft_do_tab(t_v *f)
 {
 	int		x = 0;
-	FILE	*fichier = NULL;
+	char	**tab;
 
-	while (x < v->platx)
-	{
-		v->map[lgn][x] = line[x + 4];
-		x++;
-		fichier = fopen("test.txt", "a+");
-		if (x == v->platx)
-			fprintf(fichier, "LA LIGNE[%d] = %s\n", lgn, v->map[lgn]);
-		fclose(fichier);
-	}
-	return (0);
-}
-
-int		ft_do_tab(t_v *f)
-{
-	int x = 0;
-
-	if (!(f->map = (char**)malloc(sizeof(char*) * f->platy)))
+	if (!(tab = (char**)malloc(sizeof(char*) * f->platy)))
 		return (0);
 	while (x < f->platy)
 	{
-		if (!(f->map[x] = (char*)malloc(sizeof(char) * f->platx + 1)))
+		if (!(tab[x] = (char*)malloc(sizeof(char) * f->platx + 1)))
 			return (0);
-		f->map[x][f->platx] = '\0';
+		tab[x][f->platx] = '\0';
 		x++;
+	}
+	return (tab);
+}
+
+int		ft_fill_lst(t_v *v, int lgn, char *line)
+{
+	int		x = 0;
+	t_map	*tmp;
+	int		lg;
+
+	lg = ft_nbrlen(lgn);
+	tmp = v->lst;
+	// printf("line = %s, lg = %d\n", line, lg);
+	// printf("list = %p\n", v->lst);
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+
+	while (x <= v->platx)
+	{
+		tmp->map[lgn][x] = line[x + lg + 1];
+		x++;
+		if (x == v->platx)
+			printf("tour%d[%d] = %s\n", tmp->tour, lgn, tmp->map[lgn]);
 	}
 	return (0);
 }
 
-void	event_handler(t_v *v)
+int		ft_add_list(t_v *v, int tour)
 {
-	int		game;
-	char	*line = NULL;
+	t_map	*tmp;
 
-	game = 1;
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	while (game && get_next_line(0, &line) > 0)
+	tmp = v->lst;
+	if (tmp != NULL)
 	{
-		// if (line[0] == 'P' && line[1] == 'l' && v->init == TRUE)
-		// {
-		//
-		// 	update_image(v, v->tex);
-		// }
-		if (line[0] == 'P' && line[1] == 'l' && v->init == FALSE)
-		{
-			v->platy = ft_atoi(&line[8]);
-			v->platx = ft_atoi(&line[11]);
-			ft_do_tab(v);
-			ft_draw_grid(v->tex);
-			update_image(v, v->tex);
-			v->init = TRUE;
-		}
-		if (line[0] > 47 && line[0] < 58)
-			ft_fill_map(v, ft_atoi(&line[0]), line);
-		while ((SDL_PollEvent(&(v->event))) != 0)
-		{
-			if (v->event.type == SDL_QUIT)
-				game = 0;
-			if (v->event.type == SDL_KEYDOWN
-				&& keyboard_controls(v, v->event.key.keysym.sym) == 0)
-				game = 0;
-		}
-		handle_keys(v);
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		if (!(tmp->next = (t_map*)malloc(sizeof(t_map) * 1)))
+			exit(0);
+		tmp->next->prev = tmp;
+		tmp = tmp->next;
 	}
+	else
+	{
+		if (!(v->lst = (t_map*)malloc(sizeof(t_map) * 1)))
+			exit(0);
+		v->lst->prev = NULL;
+		tmp = v->lst;
+	}
+	tmp->tour = tour;
+	tmp->map = ft_do_tab(v);
+	tmp->piece = NULL;
+	tmp->next = NULL;
+	// printf("list = %p   &&   tmp = %p\n", v->lst, tmp);
+	return (0);
 }
 
+int		ft_init_visu(t_v *v)
+{
+	int		fd;
+	int		tour;
+	char	*line = NULL;
+
+	fd = open("/Users/jgehin/42/Filler/test.txt", O_RDONLY);
+	tour = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (line[0] == 'P')
+		{
+			v->platy = ft_atoi(&line[11]);
+			v->platx = ft_atoi(&line[8]);
+			if (v->platx > 99 || v->platy > 99)
+				exit (0); //pas d'impression de map >=100
+			// ft_do_tab(v);
+			// ft_draw_grid(v->tex);
+			// update_image(v, v->tex);
+		}
+		if (line[0] == 'T')
+		{
+			tour = ft_atoi(&line[5]);
+			ft_add_list(v, tour);
+		}
+		if (line[0] > 47 && line[0] < 58)
+			ft_fill_lst(v, ft_atoi(&line[0]), line);
+	}
+	return (0);
+}
 
 int		main(void)
 {
 	int ret = 0;
 	t_v	v;
 
+	v.window = NULL;
+	v.renderer = NULL;
+	v.tex = NULL;
+	v.lst = NULL;
+	v.platx = 0;
+	v.platy = 0;
+	v.init = 0;
 	initialize_sdl(&v);
+	ft_init_visu(&v);
 	// ret = ft_visu(&v);
 	event_handler(&v);
 	return (ret);

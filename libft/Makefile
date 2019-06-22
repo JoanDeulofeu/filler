@@ -17,7 +17,7 @@ SRC_NAME = ft_abs.c ft_atoi.c ft_bzero.c ft_count_if.c ft_foreach.c \
 			ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c \
 			ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
 			ft_strupcase.c ft_swap.c ft_tolower.c ft_toupper.c get_next_line.c \
-			ft_swap_double.c ft_freetabtab.c
+			ft_swap_double.c ft_freetabtab.c ft_nbrlen.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -33,10 +33,13 @@ HEADER_NAME = libft.h
 
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
+OK = echo "[32m OK ✓ [0m"
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $@ $^
+	@$(OK)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -45,6 +48,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 clean:
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@$(OK)
 
 fclean: clean
 	@rm -f $(NAME)

@@ -26,7 +26,7 @@ int		ft_fill_map(t_f *f, int lgn, char *line)
 		{
 			if (lgn == 0)
 				fprintf(fichier, "TOUR %d\n", f->round++);
-			fprintf(fichier, " %s\n", f->map[lgn]);
+			fprintf(fichier, "%d %s\n", lgn, f->map[lgn]);
 		}
 		fclose(fichier);
 	}

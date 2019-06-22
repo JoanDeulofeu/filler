@@ -33,12 +33,20 @@ typedef struct		s_texture {
 	Uint32			color_tmp;
 }					t_texture;
 
+typedef struct		s_map {
+	int				tour;
+	char			**map;
+	char			**piece;
+	struct s_map	*next;
+	struct s_map	*prev;
+}					t_map;
+
 typedef struct		s_v {
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
 	SDL_Event		event;
 	t_texture		*tex;
-	char			**map;
+	t_map			*lst;
 	int				platx;
 	int				platy;
 	int				init;
@@ -61,6 +69,6 @@ void				handle_keys(t_v *v);
 void				event_handler(t_v *v);
 
 //MAP.C
-void				ft_draw_grid(t_texture *tex);
+void				ft_draw_grid(t_v *v, t_texture *tex);
 
 #endif

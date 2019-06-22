@@ -3,6 +3,7 @@
 int		ft_do_tab(t_f *f)
 {
 	int x = 0;
+	FILE	*fichier = NULL;
 
 	if (!(f->map = (char**)malloc(sizeof(char*) * f->platy)))
 		return (0);
@@ -13,6 +14,9 @@ int		ft_do_tab(t_f *f)
 		f->map[x][f->platx] = '\0';
 		x++;
 	}
+	fichier = fopen("test.txt", "a+");
+	fprintf(fichier, "PLATEAU %d %d\n", f->platx, f->platy);
+	fclose(fichier);
 	return (0);
 }
 
