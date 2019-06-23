@@ -71,7 +71,7 @@ void	ft_draw_grid(t_v *v, t_texture *tex)
 	espy = ft_find_esp(v->platy);
 	v->casex = espx;
 	v->casey = espy;
-	orig.x = (WIDTH - (v->platx * espx)) / 2;
+	orig.x = (WIDTH - 400 - (v->platx * espx)) / 2;
 	orig.y = (HEIGHT - (v->platy * espy)) / 2;
 	dest.x = orig.x + (v->platx * espx);
 	dest.y = orig.y + (v->platy * espy);

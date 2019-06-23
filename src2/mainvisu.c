@@ -45,8 +45,8 @@ int		ft_fill_lst(t_v *v, int lgn, char *line)
 	{
 		tmp->map[lgn][x] = line[x + lg + 1];
 		x++;
-		if (x == v->platx)
-			printf("tour%d[%d] = %s\n", tmp->tour, lgn, tmp->map[lgn]);
+		// if (x == v->platx)
+			// printf("tour%d[%d] = %s\n", tmp->tour, lgn, tmp->map[lgn]);
 	}
 	return (0);
 }
@@ -73,6 +73,7 @@ int		ft_add_list(t_v *v, int tour)
 		tmp = v->lst;
 	}
 	tmp->tour = tour;
+	v->last_round = tour;
 	tmp->map = ft_do_tab(v);
 	tmp->piece = NULL;
 	tmp->next = NULL;
@@ -126,6 +127,8 @@ int		main(void)
 	v.casey = 0;
 	v.init = 0;
 	v.tour = 1;
+	v.last_round = 1;
+	v.play = FALSE;
 	initialize_sdl(&v);
 	ft_init_visu(&v);
 	// ret = ft_visu(&v);

@@ -3,10 +3,10 @@ NAME2 = visu
 
 SRC_PATH =		src
 SRC_NAME =		mainfiller.c	\
-							init.c 				\
-							algo.c 				\
-							pct.c  				\
-							free.c
+				init.c 			\
+				algo.c 			\
+				pct.c  			\
+				free.c
 
 SRC_PATH2 =		src2
 SRC_NAME2 =		mainvisu.c	\
@@ -14,10 +14,11 @@ SRC_NAME2 =		mainvisu.c	\
 				event.c		\
 				errors.c	\
 				map.c		\
-				case.c
+				case.c		\
+				menu.c
 
 CC = gcc
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L libft/ -lft
 LBFLAGS = -I libft/includes/ -MMD
 
@@ -114,6 +115,8 @@ visuclean:
 	@rmdir $(OBJ_PATH2) 2> /dev/null || true
 	@rm -f $(NAME2)
 	@$(OK)
+
+revisu: visuclean visu
 
 clean:
 	@make clean -C libft/
