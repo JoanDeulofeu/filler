@@ -30,10 +30,10 @@ t_texture	*initialize_texture(t_v *v, int width, int height)
 		return (NULL);
 	text->color_tmp = 0xFFFFFFFF;
 	return (text);
-	//cibabdceabwefk
+	//cibabdcea1425
 }
 
-TTF_Font	*init_font(void)
+TTF_Font	*ft_init_font(void)
 {
 	TTF_Font	*font;
 
@@ -52,6 +52,11 @@ void		initialize_sdl(t_v *v)
 	v->tex = NULL;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 		ft_error_sdl("Échec de l'initialisation de la SDL");
+	if(TTF_Init() == -1)
+	{
+		fprintf(stderr, "Erreur initialisation TTF_Init: %s\n", TTF_GetError());
+		exit(EXIT_FAILURE);
+	}
 	if (!(v->window = SDL_CreateWindow("Filler", 200,
 		200, WIDTH, HEIGHT, SDL_WINDOW_SHOWN)))
 		ft_error_sdl("Échec de creation de la fenetre");
@@ -59,10 +64,5 @@ void		initialize_sdl(t_v *v)
 		ft_error_sdl("Échec de chargement du renderer");
 	if (!(v->tex = initialize_texture(v, WIDTH, HEIGHT)))
 		exit(-1);
-	if(TTF_Init() == -1)
-	{
-	    fprintf(stderr, "Erreur initialisation TTF_Init: %s\n", TTF_GetError());
-	    exit(EXIT_FAILURE);
-	}
 	// v->font = init_font();
 }

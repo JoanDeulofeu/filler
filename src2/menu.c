@@ -132,32 +132,35 @@ int		ft_draw_title(t_v *v, int startx, int starty)
 // }
 
 
-// void	component_text(const char *str, int x, int y, t_v *v)
-// {
-// 	SDL_Surface		*surface;
-// 	SDL_Texture		*texture;
-// 	SDL_Rect		pos;
-//
-// 	pos.x = x;
-// 	pos.y = y;
-//
-// 	surface = TTF_RenderText_Shaded(sdl->font, "Welcome to 42!",
-// 		(SDL_Color){255, 255, 255, 255}, (SDL_Color){70, 70, 70, 0});
-//
-// 	SDL_SetColorKey(surface, SDL_TRUE, 0);
-//
-// 	texture = SDL_CreateTextureFromSurface(v->renderer, surface);
-//
-// 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
-//
-// 	if (surface != NULL)
-// 		SDL_FreeSurface(surface);
-//
-// 	SDL_SetRenderTarget(v->renderer, tex->texture);
-// 	SDL_UpdateTexture(tex->texture, NULL, tex->content, WIDTH * sizeof(Uint32));
-// 	SDL_SetRenderTarget(v->renderer, NULL);
-// 	return (text);
-// }
+void	ft_create_ttf_texture(char *str, int x, int y, t_v *v)
+{
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
+	SDL_Rect		pos;
+	TTF_Font		*police;
+
+	pos.x = x;
+	pos.y = y;
+	police = ft_init_font();
+
+	surface = TTF_RenderText_Shaded(police, str,
+		(SDL_Color){255, 0, 0, 255}, (SDL_Color){70, 70, 70, 0});
+
+	SDL_SetColorKey(surface, SDL_TRUE, 0);
+
+	texture = SDL_CreateTextureFromSurface(v->renderer, surface);
+
+	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
+
+	if (surface != NULL)
+		SDL_FreeSurface(surface);
+
+	// SDL_SetRenderTarget(v->renderer, tex->texture);
+	// SDL_UpdateTexture(tex->texture, NULL, tex->content, WIDTH * sizeof(Uint32));
+	// SDL_SetRenderTarget(v->renderer, NULL);
+	SDL_RenderCopy(v->renderer, texture, NULL, &pos);
+	SDL_RenderPresent(v->renderer);
+}
 
 int		ft_draw_menu(t_v *v)
 {
@@ -183,6 +186,7 @@ int		ft_draw_menu(t_v *v)
 		coord.y++;
 	}
 	ft_draw_title(v, HEIGHT + 20, 20);
+	ft_create_ttf_texture("sdl cest de la merde", 1100, 900, v);
 	// txt = ft_write_menu(v);
 	return (0);
 }

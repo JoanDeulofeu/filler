@@ -81,4 +81,6 @@ void				ft_draw_grid(t_v *v, t_texture *tex);
 int					ft_draw_case(t_v *v);
 int					ft_draw_menu(t_v *v);
 
+TTF_Font	*ft_init_font(void);
+
 #endif

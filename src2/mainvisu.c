@@ -112,9 +112,8 @@ int		ft_init_visu(t_v *v)
 	return (0);
 }
 
-int		main(void)
+int		ft_suite(void)
 {
-	int ret = 0;
 	t_v	v;
 
 	v.window = NULL;
@@ -133,5 +132,13 @@ int		main(void)
 	ft_init_visu(&v);
 	// ret = ft_visu(&v);
 	event_handler(&v);
+	return (0);
+}
+
+int		main(void)
+{
+	int ret = 0;
+
+	ft_suite();
 	return (ret);
 }
