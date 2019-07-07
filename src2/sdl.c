@@ -32,10 +32,24 @@ t_texture	*initialize_texture(t_v *v, int width, int height)
 	return (text);
 }
 
+TTF_Font	*init_font(void)
+{
+	TTF_Font	*font;
+
+	if ((font = TTF_OpenFont("font/pressstart.ttf", 20)) != NULL)
+		return (font);
+	if ((font = TTF_OpenFont("arial.ttf", 12)) != NULL)
+		return (font);
+	ft_error_sdl("SDL_ttf");
+	exit(EXIT_FAILURE);
+	return (font);
+}
+
 void		initialize_sdl(t_v *v)
 {
 	v->window = NULL;
 	v->renderer = NULL;
+	// v->font = NULL;
 	v->tex = NULL;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 		ft_error_sdl("Échec de l'initialisation de la SDL");
@@ -46,4 +60,10 @@ void		initialize_sdl(t_v *v)
 		ft_error_sdl("Échec de chargement du renderer");
 	if (!(v->tex = initialize_texture(v, WIDTH, HEIGHT)))
 		exit(-1);
+	if(TTF_Init() == -1)
+	{
+	    fprintf(stderr, "Erreur initialisation TTF_Init: %s\n", TTF_GetError());
+	    exit(EXIT_FAILURE);
+	}
+	// v->font = init_font();
 }

@@ -57,5 +57,6 @@ SDL2
 SDL2/*
 SDL2_mixer-2.0.4
 SDL2-2.0.9
+SDL2_ttf-2.0.15
 visu
 *.gz
