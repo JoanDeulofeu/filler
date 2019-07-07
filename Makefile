@@ -45,9 +45,11 @@ SDLFLAGS =  $(SDLINCL) $(shell $(ABSOLUTE_DIR)/SDL2/bin/sdl2-config --libs)
 ABSOLUTE_DIR = $(shell pwd)
 SDL2_SRC = $(ABSOLUTE_DIR)/SDL2-2.0.9
 SDL2_MIX_SRC = $(ABSOLUTE_DIR)/SDL2_mixer-2.0.4
+SDL2_TTF_SRC = $(ABSOLUTE_DIR)/SDL2_ttf-2.0.15
+
 
 MIXINCL = -I ./SDL2/include/SDL2/
-MIXFLAGS = $(MIXINCL) -L./SDL2/lib -lSDL2_MIXER
+MIXFLAGS = $(MIXINCL) -L./SDL2/lib -lSDL2_MIXER -lSDL2_ttf
 
 OK = echo "[32m OK ✓ [0m"
 
@@ -104,6 +106,21 @@ sdl :
 		$(SDL2_MIX_SRC)/configure --prefix $(ABSOLUTE_DIR)/SDL2; \
 		@make -j6; \
 		make install;
+	cd $(ABSOLUTE_DIR)
+	if test ! -f SDL2_ttf-2.0.15.tar.gz; \
+	then curl https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz -o SDL2_ttf-2.0.15.tar.gz; \
+	fi
+	if test ! -d SDL2_ttf-2.0.15; \
+	then tar xvf SDL2_ttf-2.0.15.tar.gz; \
+	fi
+	cd SDL2/build; \
+		$(SDL2_TTF_SRC)/configure --prefix $(ABSOLUTE_DIR)/SDL2; \
+		@make -j6; \
+		make install;
+
+https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz
+
+
 
 sdlclean:
 	@rm -rf $(SDL2_SRC) $(SDL2_MIX_SRC) SDL_2.0.9.tar.gz SDL2_mixer-2.0.4.tar.gz SDL2
@@ -131,6 +148,6 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-.PHONY: make clean fclean re sdl sdlclean
+.PHONY: make clean fclean re sdl sdlclean revisu visuclean visu
 
 -include $(OBJ:.o=.d)

@@ -33,18 +33,105 @@
 // 	{
 // 		while (x < svx + f->piecex)
 // 		{
-//
+// 			if (f->map[y][x] = 'T')
+// 				f->map[y][x] == '.';
+// 			x++;
 // 		}
+// 		x = svx;
+// 		y++;
 // 	}
 // 	return (0);
 // }
 //
+// char	ft_dist_me(t_f *f, int casex, int casey)
+// {
+// 	int		dist_x = 0;
+// 	int		dist_y = 0;
+// 	int		dist = 10000000;
+// 	int		x = 0;
+// 	int		y = 0;
+//
+// 	while (y < HEIGHT)
+// 	{
+// 		while (x < WIDTH)
+// 		{
+// 			if (f->map[y][x] == f->me || f->map[y][x] == 'T')
+// 			{
+// 				dist_x = casex > x ? casex - x : x - casex;
+// 				dist_y = casey > y ? casey - y : y - casey;
+// 				if (dist_x + dist_y < dist)
+// 					dist = dist_x + dist_y;
+// 			}
+// 			x++;
+// 		}
+// 		x = 0;
+// 		y++;
+// 	}
+// 	return (dist);
+// }
+//
+// char	ft_dist_him(t_f *f, int casex, int casey)
+// {
+// 	int		dist_x = 0;
+// 	int		dist_y = 0;
+// 	int		dist = 10000000;
+// 	int		x = 0;
+// 	int		y = 0;
+//
+// 	while (y < HEIGHT)
+// 	{
+// 		while (x < WIDTH)
+// 		{
+// 			if (f->map[y][x] == f->him)
+// 			{
+// 				dist_x = casex > x ? casex - x : x - casex;
+// 				dist_y = casey > y ? casey - y : y - casey;
+// 				if (dist_x + dist_y < dist)
+// 					dist = dist_x + dist_y;
+// 			}
+// 			x++;
+// 		}
+// 		x = 0;
+// 		y++;
+// 	}
+// 	return (dist);
+// }
+//
+// int		ft_algo(t_f *f)
+// {
+// 	int		me = 0;
+// 	int		him = 0;
+// 	int		x = 0;
+// 	int		y = 0;
+//
+// 	while (y < HEIGHT)
+// 	{
+// 		while (x < WIDTH)
+// 		{
+// 			if (f->map[y][x] == f->me)
+// 				me++;
+// 			else if (f->map[y][x] == f->him)
+// 				him++;
+// 			else if (ft_dist_me(f, x, y) < ft_dist_him(f, x, y))
+// 				me++;
+// 			else
+// 				him++;
+// 			x++;
+// 		}
+// 		x = 0;
+// 		y++;
+// 	}
+// 	return ((100 * me) / (f->platx * f->platy));
+// }
+//
 // int		ft_pct(t_f *f, int x, int y)
 // {
+// 	int pct;
+//
 // 	ft_place_piece(f, x, y);
-// 	//algo
+// 	pct = ft_algo(f);
 // 	ft_remove_place(f, x, y);
-// 	return (0);
+// 	return (pct);
 // }
 
 int		ft_touch(t_f *f, int x, int y)
@@ -62,6 +149,5 @@ int		ft_touch(t_f *f, int x, int y)
 	// fichier = fopen("test.txt", "a+");
 	// fprintf(fichier, "Pct = %d\n", pct);
 	// fclose(fichier);
-
 	return (pct);
 }
