@@ -30,15 +30,14 @@ t_texture	*initialize_texture(t_v *v, int width, int height)
 		return (NULL);
 	text->color_tmp = 0xFFFFFFFF;
 	return (text);
+	//cibabdceabwefk
 }
 
 TTF_Font	*init_font(void)
 {
 	TTF_Font	*font;
 
-	if ((font = TTF_OpenFont("font/pressstart.ttf", 20)) != NULL)
-		return (font);
-	if ((font = TTF_OpenFont("arial.ttf", 12)) != NULL)
+	if ((font = TTF_OpenFont("sdl_font/press-start.ttf", 20)) != NULL)
 		return (font);
 	ft_error_sdl("SDL_ttf");
 	exit(EXIT_FAILURE);
