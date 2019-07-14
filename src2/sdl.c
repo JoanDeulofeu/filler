@@ -14,7 +14,7 @@ void	update_image(t_v *v, t_texture *tex)
 	SDL_UpdateTexture(tex->texture, NULL, tex->content, WIDTH * sizeof(Uint32));
 	SDL_SetRenderTarget(v->renderer, NULL);
 	SDL_RenderCopy(v->renderer, tex->texture, NULL, NULL);
-	SDL_RenderPresent(v->renderer);
+	// SDL_RenderPresent(v->renderer);
 }
 
 t_texture	*initialize_texture(t_v *v, int width, int height)
@@ -31,17 +31,6 @@ t_texture	*initialize_texture(t_v *v, int width, int height)
 	text->color_tmp = 0xFFFFFFFF;
 	return (text);
 	//cibabdcea1425
-}
-
-TTF_Font	*ft_init_font(void)
-{
-	TTF_Font	*font;
-
-	if ((font = TTF_OpenFont("sdl_font/press-start.ttf", 20)) != NULL)
-		return (font);
-	ft_error_sdl("SDL_ttf");
-	exit(EXIT_FAILURE);
-	return (font);
 }
 
 void		initialize_sdl(t_v *v)

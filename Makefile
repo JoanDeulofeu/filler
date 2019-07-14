@@ -15,7 +15,8 @@ SRC_NAME2 =		mainvisu.c	\
 				errors.c	\
 				map.c		\
 				case.c		\
-				menu.c
+				menu.c		\
+				ttf.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

@@ -87,81 +87,6 @@ int		ft_draw_title(t_v *v, int startx, int starty)
 	return (0);
 }
 
-// SDL_Texture	*ft_write_menu(t_v *v)
-// {
-// 	SDL_Surface *texte = NULL;
-// 	SDL_Texture *texture;
-// 	SDL_Rect position;
-// 	TTF_Font *police = NULL;
-// 	SDL_Color color;
-// 	Uint32 rmask, gmask, bmask, amask;
-//
-// 	color.r = 255;
-// 	color.g = 50;
-// 	color.b = 50;
-// 	color.a = 255;
-//
-// 	// /* Chargement de la police */
-// 	// police = TTF_OpenFont("angelina.ttf", 65);
-// 	// /* Écriture du texte dans la SDL_Surface texte en mode Blended (optimal) */
-// 	// texte = TTF_RenderText_Blended(police, "Welcome to 42!", color);
-// 	// position.x = 60;
-// 	// position.y = 370;
-// 	// if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-// 	// {
-// 	// 	rmask = 0xff000000;
-// 	// 	gmask = 0x00ff0000;
-// 	// 	bmask = 0x0000ff00;
-// 	// 	amask = 0x000000ff;
-// 	// }
-// 	// else
-// 	// {
-// 	// 	rmask = 0x000000ff;
-// 	// 	gmask = 0x0000ff00;
-// 	// 	bmask = 0x00ff0000;
-// 	// 	amask = 0xff000000;
-// 	// }
-// 	// texture = SDL_CreateTextureFromSurface(v->renderer, texte);
-// 	// if (texture == NULL) {
-// 	//     fprintf(stderr, "CreateTextureFromSurface failed: %s\n", SDL_GetError());
-// 	//     exit(1);
-// 	// }
-// 	// SDL_FreeSurface(texte);
-// 	// texte = NULL;
-// 	return (texture);
-// }
-
-
-void	ft_create_ttf_texture(char *str, int x, int y, t_v *v)
-{
-	SDL_Surface		*surface;
-	SDL_Texture		*texture;
-	SDL_Rect		pos;
-	TTF_Font		*police;
-
-	pos.x = x;
-	pos.y = y;
-	police = ft_init_font();
-
-	surface = TTF_RenderText_Shaded(police, str,
-		(SDL_Color){255, 0, 0, 255}, (SDL_Color){70, 70, 70, 0});
-
-	SDL_SetColorKey(surface, SDL_TRUE, 0);
-
-	texture = SDL_CreateTextureFromSurface(v->renderer, surface);
-
-	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
-
-	if (surface != NULL)
-		SDL_FreeSurface(surface);
-
-	// SDL_SetRenderTarget(v->renderer, tex->texture);
-	// SDL_UpdateTexture(tex->texture, NULL, tex->content, WIDTH * sizeof(Uint32));
-	// SDL_SetRenderTarget(v->renderer, NULL);
-	SDL_RenderCopy(v->renderer, texture, NULL, &pos);
-	SDL_RenderPresent(v->renderer);
-}
-
 int		ft_draw_menu(t_v *v)
 {
 	Uint32	color;
@@ -186,7 +111,7 @@ int		ft_draw_menu(t_v *v)
 		coord.y++;
 	}
 	ft_draw_title(v, HEIGHT + 20, 20);
-	ft_create_ttf_texture("sdl cest de la merde", 1100, 900, v);
+	// ft_create_ttf_texture("sdl cest de la merde", 1100, 900, v);
 	// txt = ft_write_menu(v);
 	return (0);
 }

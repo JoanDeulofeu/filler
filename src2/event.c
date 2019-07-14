@@ -44,6 +44,9 @@ void	handle_keys(t_v *v)
 		ft_draw_grid(v, v->tex);
 		ft_draw_case(v);
 		update_image(v, v->tex);
+		ft_create_ttf_texture("SCORE JOUEUR 1 : ", 1070, 200, v);
+		SDL_RenderPresent(v->renderer);
+
 	// }
 }
 
