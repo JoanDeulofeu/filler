@@ -22,34 +22,58 @@ int		keyboard_controls(t_v *v, int key)
 	return (-1);
 }
 
-void	ft_draw_all_ttf(t_v *v, TTF_Font *police)
+void	ft_draw_piece_bar(t_v *v, t_pos pos, Uint32 color)
 {
-	t_ttf		ttf;
+	int		x = 0;
+	int		y = 0;
+	t_pos	coord;
 
-	ttf.r = 130;
-	ttf.g = 230;
-	ttf.b = 230;
-	ttf.pos.x = 1070;
-	ttf.pos.y = 200;
-	ttf.str = ft_strdup("SCORE JOUEUR 1 : ");
-	ft_create_ttf(ttf, v, police);
-	ttf.pos.x = 1270;
-	ttf.pos.y = 200;
-	ttf.str = ft_strdup(ft_itoa(v->j1score));
-	ft_create_ttf(ttf, v, police);
+	while (y < 25)
+	{
+		while (x < 3)
+		{
+			coord.x = pos.x + x;
+			coord.y = pos.y + y;
+			set_pixel(v->tex, color, coord);
+			x++;
+		}
+		y++;
+		x = 0;
+	}
+}
 
+void	ft_draw_score_bar(t_v *v)
+{
+	Uint32	color;
+	int		score_max;
+	int		pct;
+	int		avc;
+	t_pos	pos;
 
-	ttf.r = 175;
-	ttf.g = 70;
-	ttf.b = 215;
-	ttf.pos.x = 1070;
-	ttf.pos.y = 400;
-	ttf.str = ft_strdup("SCORE JOUEUR 2 : ");
-	ft_create_ttf(ttf, v, police);
-	ttf.pos.x = 1270;
-	ttf.pos.y = 400;
-	ttf.str = ft_strdup(ft_itoa(v->j2score));
-	ft_create_ttf(ttf, v, police);
+	score_max = v->platx * v->platy;
+	pct = ((100 * v->j1score) / score_max) + 1;
+	pos.x = 1070;
+	pos.y = 250;
+	avc = 1;
+	while (avc < 100)
+	{
+		color = (avc < pct) ? 0x00d9ffFF : 0x37a6adFF;
+		ft_draw_piece_bar(v, pos, color);
+		avc++;
+		pos.x += 3;
+	}
+
+	pct = ((100 * v->j2score) / score_max) + 1;
+	pos.x = 1070;
+	pos.y = 450;
+	avc = 1;
+	while (avc < 100)
+	{
+		color = (avc < pct) ? 0xae45d9FF : 0x9c6ab0FF;
+		ft_draw_piece_bar(v, pos, color);
+		avc++;
+		pos.x += 3;
+	}
 }
 
 void	handle_keys(t_v *v, TTF_Font *police)
@@ -62,6 +86,7 @@ void	handle_keys(t_v *v, TTF_Font *police)
 	ft_draw_case(v);
 	update_image(v, v->tex);
 	ft_draw_all_ttf(v, police);
+	ft_draw_score_bar(v);
 	SDL_RenderPresent(v->renderer);
 }
 

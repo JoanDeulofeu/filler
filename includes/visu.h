@@ -94,5 +94,6 @@ int					ft_draw_menu(t_v *v);
 //TTF
 TTF_Font			*ft_init_font(void);
 void				ft_create_ttf(t_ttf ttf, t_v *v, TTF_Font *police);
+void				ft_draw_all_ttf(t_v *v, TTF_Font *police);
 
 #endif
