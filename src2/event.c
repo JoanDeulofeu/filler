@@ -24,33 +24,54 @@ int		keyboard_controls(t_v *v, int key)
 
 void	ft_draw_all_ttf(t_v *v, TTF_Font *police)
 {
-	SDL_Rect	pos;
+	t_ttf		ttf;
 
-	pos.x = 1070;
-	pos.y = 200;
-	ft_create_ttf("SCORE JOUEUR 1 : ", pos, v, police);
+	ttf.r = 130;
+	ttf.g = 230;
+	ttf.b = 230;
+	ttf.pos.x = 1070;
+	ttf.pos.y = 200;
+	ttf.str = ft_strdup("SCORE JOUEUR 1 : ");
+	ft_create_ttf(ttf, v, police);
+	ttf.pos.x = 1270;
+	ttf.pos.y = 200;
+	ttf.str = ft_strdup(ft_itoa(v->j1score));
+	ft_create_ttf(ttf, v, police);
+
+
+	ttf.r = 175;
+	ttf.g = 70;
+	ttf.b = 215;
+	ttf.pos.x = 1070;
+	ttf.pos.y = 400;
+	ttf.str = ft_strdup("SCORE JOUEUR 2 : ");
+	ft_create_ttf(ttf, v, police);
+	ttf.pos.x = 1270;
+	ttf.pos.y = 400;
+	ttf.str = ft_strdup(ft_itoa(v->j2score));
+	ft_create_ttf(ttf, v, police);
 }
 
-void	handle_keys(t_v *v)
+void	handle_keys(t_v *v, TTF_Font *police)
 {
 	const Uint8		*keys;
-	TTF_Font		*police;
 
 	keys = SDL_GetKeyboardState(NULL);
-	police = ft_init_font();
 
-		ft_draw_grid(v, v->tex);
-		ft_draw_case(v);
-		update_image(v, v->tex);
-		ft_draw_all_ttf(v, police);
-		SDL_RenderPresent(v->renderer);
+	ft_draw_grid(v, v->tex);
+	ft_draw_case(v);
+	update_image(v, v->tex);
+	ft_draw_all_ttf(v, police);
+	SDL_RenderPresent(v->renderer);
 }
 
 void	event_handler(t_v *v)
 {
-	int		game;
+	int			game;
+	TTF_Font	*police;
 
 	game = 1;
+	police = ft_init_font();
 	// SDL_SetRelativeMouseMode(SDL_TRUE);
 	ft_draw_menu(v);
 	while (game)
@@ -70,7 +91,7 @@ void	event_handler(t_v *v)
 				&& keyboard_controls(v, v->event.key.keysym.sym) == 3)
 				v->play = v->play == FALSE ? TRUE : FALSE;
 		}
-		handle_keys(v);
+		handle_keys(v, police);
 		if (v->play == TRUE && v->tour < v->last_round)
 			v->tour++;
 		// printf("tour = %d\n", v->tour);

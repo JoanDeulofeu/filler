@@ -122,6 +122,8 @@ int		ft_suite(void)
 	v.lst = NULL;
 	v.platx = 0;
 	v.platy = 0;
+	v.j1score = 0;
+	v.j2score = 0;
 	v.casex = 0;
 	v.casey = 0;
 	v.init = 0;

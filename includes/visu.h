@@ -30,6 +30,14 @@ typedef struct		s_pos {
 	short			y;
 }					t_pos;
 
+typedef struct		s_ttf {
+	SDL_Rect		pos;
+	char			*str;
+	int				r;
+	int				g;
+	int				b;
+}					t_ttf;
+
 typedef struct		s_texture {
 	Uint32			*content;
 	SDL_Texture		*texture;
@@ -51,6 +59,8 @@ typedef struct		s_v {
 	t_texture		*tex;
 	t_map			*lst;
 	int				tour;
+	int				j1score;
+	int				j2score;
 	int				platx;
 	int				platy;
 	int				casex;
@@ -73,7 +83,7 @@ void				ft_error_sdl(char *str);
 
 //EVENT.C
 int					keyboard_controls(t_v *v, int key);
-void				handle_keys(t_v *v);
+void				handle_keys(t_v *v, TTF_Font *police);
 void				event_handler(t_v *v);
 
 //DRAW
@@ -81,7 +91,8 @@ void				ft_draw_grid(t_v *v, t_texture *tex);
 int					ft_draw_case(t_v *v);
 int					ft_draw_menu(t_v *v);
 
-TTF_Font	*ft_init_font(void);
-void	ft_create_ttf(char *str, SDL_Rect pos, t_v *v, TTF_Font *police);
+//TTF
+TTF_Font			*ft_init_font(void);
+void				ft_create_ttf(t_ttf ttf, t_v *v, TTF_Font *police);
 
 #endif

@@ -51,6 +51,8 @@ int		ft_draw_case(t_v *v)
 	t_map	*tmp;
 
 	tmp = v->lst;
+	v->j1score = 0;
+	v->j2score = 0;
 	while (tmp->tour != v->tour && tmp->next)
 		tmp = tmp->next;
 	while (y < v->platy)
@@ -58,9 +60,15 @@ int		ft_draw_case(t_v *v)
 		while (x < v->platx)
 		{
 			if (tmp->map[y][x] == 'X')
+			{
 				ft_pose_case(v, x, y, 'X');
+				v->j1score++;
+			}
 			else if (tmp->map[y][x] == 'O')
+			{
 				ft_pose_case(v, x, y, 'O');
+				v->j2score++;
+			}
 			else if (tmp->map[y][x] == '.')
 				ft_pose_case(v, x, y, '.');
 			x++;
