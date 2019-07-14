@@ -17,16 +17,10 @@ TTF_Font	*ft_init_font(void)
 	return (font);
 }
 
-void	ft_create_ttf_texture(char *str, int x, int y, t_v *v)
+void	ft_create_ttf(char *str, SDL_Rect pos, t_v *v, TTF_Font *police)
 {
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
-	SDL_Rect		pos;
-	TTF_Font		*police;
-
-	pos.x = x;
-	pos.y = y;
-	police = ft_init_font();
 
 	surface = TTF_RenderText_Shaded(police, str,
 		(SDL_Color){130, 230, 230, 255}, (SDL_Color){70, 70, 70, 0});

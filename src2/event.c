@@ -22,32 +22,28 @@ int		keyboard_controls(t_v *v, int key)
 	return (-1);
 }
 
+void	ft_draw_all_ttf(t_v *v, TTF_Font *police)
+{
+	SDL_Rect	pos;
+
+	pos.x = 1070;
+	pos.y = 200;
+	ft_create_ttf("SCORE JOUEUR 1 : ", pos, v, police);
+}
+
 void	handle_keys(t_v *v)
 {
-	const Uint8 *keys;
+	const Uint8		*keys;
+	TTF_Font		*police;
 
 	keys = SDL_GetKeyboardState(NULL);
-	// if (keys[LEFT] || keys[RIGHT] || keys[UP] || keys[DOWN])
-	// 	move_player(s, keys, keys[SPRINT]);
-	// if (keys[LEFT_AR] || keys[RIGHT_AR] || keys[UP_AR] || keys[DOWN_AR])
-	// 	turn_camera(s, keys, 0);
-	// if (s->sdl->event.type == SDL_MOUSEMOTION)
-	// 	turn_camera(s, keys, 1);
-	// if (s->active_map && HEIGHT / SPACE <= s->height && WIDTH / SPACE
-	// 	<= s->width)
-	// 	draw_minimap(s, 0, 0);
-	// else
-	// {
-	// 	raycast_visualization(s);
-		// draw_player(s, s->p_pos);
-		// update_image(s, s->sdl->game);
+	police = ft_init_font();
+
 		ft_draw_grid(v, v->tex);
 		ft_draw_case(v);
 		update_image(v, v->tex);
-		ft_create_ttf_texture("SCORE JOUEUR 1 : ", 1070, 200, v);
+		ft_draw_all_ttf(v, police);
 		SDL_RenderPresent(v->renderer);
-
-	// }
 }
 
 void	event_handler(t_v *v)

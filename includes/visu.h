@@ -82,6 +82,6 @@ int					ft_draw_case(t_v *v);
 int					ft_draw_menu(t_v *v);
 
 TTF_Font	*ft_init_font(void);
-void	ft_create_ttf_texture(char *str, int x, int y, t_v *v);
+void	ft_create_ttf(char *str, SDL_Rect pos, t_v *v, TTF_Font *police);
 
 #endif
